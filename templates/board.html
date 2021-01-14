@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>/{{b_id}}/ - {{data['title']}} - 5chan</title>
+    </head>
+    <body>
+        <h1><a href="/">Back to home</a></h1>
+        <h1>/{{b_id}}/ - {{data['title']}}</h1>
+        {% for thread in data['list'] %}
+            <h3>{{thread['head']['c_id']}} - {{thread['head']['time']}}</h3>
+            {{thread['head']['text']}}<br>
+            {% if thread['head']['image'] %}
+                <a href="/images/{{thread['head']['image']}}"><img src="/images/{{thread['head']['image']}}" style="width:500px"></img></a><br>
+            {% endif %}
+            {% if thread['last']['c_id'] != thread['head']['c_id']%}
+                <blockquote>
+                    <h3>{{thread['last']['c_id']}} - {{thread['last']['time']}}</h3>
+                    {{thread['last']['text']}}<br>
+                    {% if thread['last']['image'] %}
+                        <a href="/images/{{thread['last']['image']}}"><img src="/images/{{thread['last']['image']}}" style="width:500px"></img></a><br>
+                    {% endif %}
+                </blockquote>
+            {% endif %}
+            <a href="/{{b_id}}/{{thread['t_id']}}/all">See full thread</a>
+            <hr>
+        {% endfor %}
+        <br><br>
+        <h2>New thread</h2>
+        <form method=post action="/{{b_id}}/new/comment" enctype="multipart/form-data">            
+            <label for="comment">Comment:</label>
+            <input type="text" id="comment" name="comment"><br>
+            
+            <label for="img">Image:</label>
+            <input type="file" id="img" name="img" accept="image/*"><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>

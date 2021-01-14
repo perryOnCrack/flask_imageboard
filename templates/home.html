@@ -1,0 +1,11 @@
+<html>
+    <head>
+        <title>5chan</title>
+    </head>
+    <body>
+        <h1>Welcom to 5chan</h1>
+        {% for id in data %}
+            <a href="/{{id}}/p1">{{data[id]}}</a><br>
+        {% endfor %}
+    </body>
+</html>

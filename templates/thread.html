@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>/{{b_id}}/ - {{t_id}} - 5chan</title>
+    </head>
+    <body>
+        <h1><a href="/{{b_id}}/p1">Back to /{{b_id}}/</a></h1>
+        {% for comment in data %}
+            <h3>{{comment['c_id']}} - {{comment['time']}}</h3>
+            {{comment['text']}}<br>
+            {% if comment['image'] %}
+                <a href="/images/{{comment['image']}}"><img src="/images/{{comment['image']}}" style="width:500px"></img></a><br>
+            {% endif %}
+            <hr>
+        {% endfor %}
+
+        <h2>Reply</h2>
+        <form method="post" action="/{{b_id}}/{{t_id}}/comment" enctype="multipart/form-data">  
+
+            <label for="comment">Comment:</label>
+            <input type="text" id="comment" name="comment"><br>
+            
+            <label for="img">Image:</label>
+            <input type="file" id="img" name="img" accept="image/*"><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>
